@@ -9,3 +9,6 @@ b_img = imread("C:\LandCoverImages\b.dib");
 fe_img = imread("C:\LandCoverImages\fe.dib");
 le_img = imread("C:\LandCoverImages\le.dib");
 nir_img = imread("C:\LandCoverImages\nir.dib");
+
+%% coordinates for each class
+stats = regionprops(labelled_ground_truth, 'PixelList');
