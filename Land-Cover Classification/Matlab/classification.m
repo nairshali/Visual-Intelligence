@@ -13,6 +13,16 @@ nir_img = imread("C:\LandCoverImages\nir.dib");
 %% coordinates for each class
 stats = regionprops(labelled_ground_truth, 'PixelList');
 
+%% Initialize Variables
+
+% empty array
+r_arr = ([]);
+g_arr = ([]);
+b_arr = ([]);
+fe_arr =([]);
+le_arr = ([]);
+nir_arr = ([]);
+
 % loop for 4 classes
 for k = 1:4
     
