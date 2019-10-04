@@ -40,4 +40,16 @@ for k = 1:size(stats,1)
     SampleCell = {};
     covCell = {};
     
+    % pixel per sample set 
+      pixelSize = 1;
+    
+    % total 30 samples per class, 5 samples from each image
+    for i = 1:5 
+        SampleCell(i,1,k) = {datasample(r_arr,pixelSize)}; 
+        SampleCell(i,2,k) = {datasample(g_arr,pixelSize)};
+        SampleCell(i,3,k) = {datasample(b_arr,pixelSize)};
+        SampleCell(i,4,k) = {datasample(fe_arr,pixelSize)};
+        SampleCell(i,5,k) = {datasample(le_arr,pixelSize)};
+        SampleCell(i,6,k) = {datasample(nir_arr,pixelSize)};
+    end
  end
