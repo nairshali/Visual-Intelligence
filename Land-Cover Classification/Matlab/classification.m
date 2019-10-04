@@ -59,3 +59,15 @@ for k = 1:size(stats,1)
     % covariance matrix is 6X6 for each class
     covCell(k,:) = {cov(cell2mat(SampleCell(:,:,k)))}; 
  end
+ 
+ % % validation with training data 
+   confusionTrainMatrix = ([]);
+   n = 30;
+
+   for cl = 1:4 %4 class 
+    
+        class1cnt = 0;
+        class2cnt = 0;
+        class3cnt = 0;
+        class4cnt = 0;
+   end
