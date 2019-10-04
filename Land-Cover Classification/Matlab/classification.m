@@ -23,6 +23,11 @@ fe_arr =([]);
 le_arr = ([]);
 nir_arr = ([]);
 
+    
+% empty cell
+SampleCell = {};
+covCell = {};
+    
 % loop for 4 classes
 for k = 1:size(stats,1)
     
@@ -35,10 +40,7 @@ for k = 1:size(stats,1)
         le_arr(i,1) = le_img(stats(k).PixelList(i,2), stats(k).PixelList(i,1));
         nir_arr(i,1) = nir_img(stats(k).PixelList(i,2), stats(k).PixelList(i,1));
     end
-    
-    % empty cell
-    SampleCell = {};
-    covCell = {};
+
     
     % pixel per sample set 
       pixelSize = 1;
