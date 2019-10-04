@@ -52,4 +52,10 @@ for k = 1:size(stats,1)
         SampleCell(i,5,k) = {datasample(le_arr,pixelSize)};
         SampleCell(i,6,k) = {datasample(nir_arr,pixelSize)};
     end
+    
+    for j = 1:6
+           muArray(k,j) = mean(cell2mat(SampleCell(:,j,k)));
+    end
+    % covariance matrix is 6X6 for each class
+    covCell(k,:) = {cov(cell2mat(SampleCell(:,:,k)))}; 
  end
