@@ -36,4 +36,8 @@ for k = 1:size(stats,1)
         nir_arr(i,1) = nir_img(stats(k).PixelList(i,2), stats(k).PixelList(i,1));
     end
     
+    % empty cell
+    SampleCell = {};
+    covCell = {};
+    
  end
