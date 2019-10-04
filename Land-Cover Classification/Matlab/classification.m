@@ -103,3 +103,5 @@ for k = 1:size(stats,1)
         confusionTrainMatrix(cl,3) = class3cnt;
         confusionTrainMatrix(cl,4) = class4cnt;
    end
+   
+   classificationAccuracy = sum(diag(confusionMatrix))/sum(confusionMatrix,'all'); 
