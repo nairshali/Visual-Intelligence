@@ -95,6 +95,11 @@ for k = 1:size(stats,1)
                 elseif val == pdf4
                     class4cnt = class4cnt + 1;
                 end
-            end
-        end
+            end    
+        end  
+
+        confusionTrainMatrix(cl,1) = class1cnt;
+        confusionTrainMatrix(cl,2) = class2cnt;
+        confusionTrainMatrix(cl,3) = class3cnt;
+        confusionTrainMatrix(cl,4) = class4cnt;
    end
