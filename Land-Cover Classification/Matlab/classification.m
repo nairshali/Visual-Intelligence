@@ -24,10 +24,10 @@ le_arr = ([]);
 nir_arr = ([]);
 
 % loop for 4 classes
-for k = 1:4
+for k = 1:size(stats,1)
     
     % loop for each co-ordinates, per class from each images
-    for i = 1:3
+    for i = 1:size(stats(k).PixelList,1)
         r_arr(i,1) = r_img(stats(k).PixelList(i,2), stats(k).PixelList(i,1));
         g_arr(i,1) = g_img(stats(k).PixelList(i,2), stats(k).PixelList(i,1));
         b_arr(i,1) = b_img(stats(k).PixelList(i,2), stats(k).PixelList(i,1));
