@@ -81,6 +81,18 @@ for k = 1:size(stats,1)
                 pdf2 = gauss_distribution(n,pixel(p),muArray(2,:),cell2mat(covCell(2))); % class 2
                 pdf3 = gauss_distribution(n,pixel(p),muArray(3,:),cell2mat(covCell(3))); % class 3
                 pdf4 = gauss_distribution(n,pixel(p),muArray(4,:),cell2mat(covCell(4))); % class 4
+                
+                val = max([pdf1,pdf2,pdf3,pdf4]);
+
+                if val == pdf1 
+                   class1cnt =  class1cnt + 1;
+                elseif val == pdf2 
+                    class2cnt = class2cnt + 1;
+                elseif val == pdf3 
+                    class3cnt = class3cnt + 1;
+                elseif val == pdf4
+                    class4cnt = class4cnt + 1;
+                end
             end
         end
    end
