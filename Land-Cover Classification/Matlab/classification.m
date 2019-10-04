@@ -73,5 +73,14 @@ for k = 1:size(stats,1)
         
         for feature = 1:size(cell2mat(SampleCell(:,:,cl)),2) % each feature 6
             pixel = cell2mat(SampleCell(:,feature,cl));
+            
+            for p = 1:size(cell2mat(SampleCell(:,:,1)),1) % each pixel within that feature, 40 pixel
+
+                % establish guassian model for each class
+                pdf1 = gauss_distribution(n,pixel(p),muArray(1,:),cell2mat(covCell(1))); % class 1
+                pdf2 = gauss_distribution(n,pixel(p),muArray(2,:),cell2mat(covCell(2))); % class 2
+                pdf3 = gauss_distribution(n,pixel(p),muArray(3,:),cell2mat(covCell(3))); % class 3
+                pdf4 = gauss_distribution(n,pixel(p),muArray(4,:),cell2mat(covCell(4))); % class 4
+            end
         end
    end
