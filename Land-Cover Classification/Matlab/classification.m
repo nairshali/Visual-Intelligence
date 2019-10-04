@@ -70,4 +70,8 @@ for k = 1:size(stats,1)
         class2cnt = 0;
         class3cnt = 0;
         class4cnt = 0;
+        
+        for feature = 1:size(cell2mat(SampleCell(:,:,cl)),2) % each feature 6
+            pixel = cell2mat(SampleCell(:,feature,cl));
+        end
    end
