@@ -52,14 +52,12 @@ for k = 1:size(stats,1)
     SampleCell(:,6,k) = {datasample(nir_arr,pixelSize,'Replace',false)};
 
     
-    % pixel per sample set 
-      pixelSize = 1;
-    
-    for j = 1:6
-           muArray(k,j) = mean(cell2mat(SampleCell(:,j,k)));
-    end
+    % mean for each image per class, total 6 means per class
+    muArray(:,k) = transpose(mean(cell2mat(SampleCell(:,:,k)),1));
+
     % covariance matrix is 6X6 for each class
-    covCell(k,:) = {cov(cell2mat(SampleCell(:,:,k)))}; 
+    covCell(k,:) = {cov(cell2mat(SampleCell(:,:,k)))};
+
  end
  
  % % validation with training data 
