@@ -90,3 +90,20 @@ for k = 1:size(stats,1)
 [C,order] = confusionmat(labelled_ground_truth(:), predicted(:),'Order',[4 3 2 1]);
 cm = confusionchart(C);
 classificationAccuracy = sum(diag(C))/sum(C,'all');
+
+%% Plot Images
+
+mymap = [1 1 0; % Yellow
+         0 1 0; % green
+         1 0 0; % red
+         0 0 0 % black
+         ];
+
+figure;
+subplot(1,2,1);
+imshow (labelled_ground_truth,mymap);
+title('Ground Truth')
+
+subplot(1,2,2);
+imshow (predicted,mymap);
+title('Predicted')
