@@ -86,47 +86,7 @@ for k = 1:size(stats,1)
         end
     end
 
-
- % % validation with training data 
-   confusionTrainMatrix = ([]);
-   n = 30;
-
-   for cl = 1:4 %4 class 
-    
-        class1cnt = 0;
-        class2cnt = 0;
-        class3cnt = 0;
-        class4cnt = 0;
-        
-        for feature = 1:size(cell2mat(SampleCell(:,:,cl)),2) % each feature 6
-            pixel = cell2mat(SampleCell(:,feature,cl));
-            
-            for p = 1:size(cell2mat(SampleCell(:,:,1)),1) % each pixel within that feature, 40 pixel
-
-                % establish guassian model for each class
-                pdf1 = gauss_distribution(n,pixel(p),muArray(1,:),cell2mat(covCell(1))); % class 1
-                pdf2 = gauss_distribution(n,pixel(p),muArray(2,:),cell2mat(covCell(2))); % class 2
-                pdf3 = gauss_distribution(n,pixel(p),muArray(3,:),cell2mat(covCell(3))); % class 3
-                pdf4 = gauss_distribution(n,pixel(p),muArray(4,:),cell2mat(covCell(4))); % class 4
-                
-                val = max([pdf1,pdf2,pdf3,pdf4]);
-
-                if val == pdf1 
-                   class1cnt =  class1cnt + 1;
-                elseif val == pdf2 
-                    class2cnt = class2cnt + 1;
-                elseif val == pdf3 
-                    class3cnt = class3cnt + 1;
-                elseif val == pdf4
-                    class4cnt = class4cnt + 1;
-                end
-            end    
-        end  
-
-        confusionTrainMatrix(cl,1) = class1cnt;
-        confusionTrainMatrix(cl,2) = class2cnt;
-        confusionTrainMatrix(cl,3) = class3cnt;
-        confusionTrainMatrix(cl,4) = class4cnt;
-   end
-   
-   classificationAccuracy = sum(diag(confusionMatrix))/sum(confusionMatrix,'all'); 
+%% confusion matrix
+[C,order] = confusionmat(labelled_ground_truth(:), predicted(:),'Order',[4 3 2 1]);
+cm = confusionchart(C);
+classificationAccuracy = sum(diag(C))/sum(C,'all');
