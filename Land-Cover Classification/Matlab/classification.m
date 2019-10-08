@@ -60,6 +60,33 @@ for k = 1:size(stats,1)
 
  end
  
+ 
+ %% Testing
+    % create result matrix
+    % predicted = None(size(labelled_ground_truth,1),size(labelled_ground_truth,2));
+    predicted = ([]);
+    % Test
+    fori = 1:size(labelled_ground_truth,1)
+        for j = 1:size(labelled_ground_truth,2)
+            % test sample vector
+            vecX = double([r_img(i,j); g_img(i,j); b_img(i,j); fe_img(i,j); le_img(i,j); nir_img(i,j)]);
+            % no of samples
+            n = numel(vecX);
+            % pdf values
+            pdfXScore = ([]);
+        
+            for k = 1:4
+                pdfX = gauss_distribution(n,vecX,muArray(:,k),cell2mat(covCell(k))); % class 1
+                 % collect pdf Score for each class
+                pdfXScore = [pdfXScore,pdfX]; 
+            end
+            % compare with ground truth
+            index = find(pdfXScore == max(pdfXScore)); % identify the class
+            predicted(i,j) = index;
+        end
+    end
+
+
  % % validation with training data 
    confusionTrainMatrix = ([]);
    n = 30;
