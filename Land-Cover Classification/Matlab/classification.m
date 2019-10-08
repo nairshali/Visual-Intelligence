@@ -40,20 +40,20 @@ for k = 1:size(stats,1)
         le_arr(i,1) = le_img(stats(k).PixelList(i,2), stats(k).PixelList(i,1));
         nir_arr(i,1) = nir_img(stats(k).PixelList(i,2), stats(k).PixelList(i,1));
     end
+    
+    % 20 samples per image 
+    rng(101);
+    pixelSize = 50; % percentage
+    SampleCell(:,1,k) = {datasample(r_arr,pixelSize,'Replace',false)}; 
+    SampleCell(:,2,k) = {datasample(g_arr,pixelSize,'Replace',false)};
+    SampleCell(:,3,k) = {datasample(b_arr,pixelSize,'Replace',false)};
+    SampleCell(:,4,k) = {datasample(fe_arr,pixelSize,'Replace',false)};
+    SampleCell(:,5,k) = {datasample(le_arr,pixelSize,'Replace',false)};
+    SampleCell(:,6,k) = {datasample(nir_arr,pixelSize,'Replace',false)};
 
     
     % pixel per sample set 
       pixelSize = 1;
-    
-    % total 30 samples per class, 5 samples from each image
-    for i = 1:5 
-        SampleCell(i,1,k) = {datasample(r_arr,pixelSize)}; 
-        SampleCell(i,2,k) = {datasample(g_arr,pixelSize)};
-        SampleCell(i,3,k) = {datasample(b_arr,pixelSize)};
-        SampleCell(i,4,k) = {datasample(fe_arr,pixelSize)};
-        SampleCell(i,5,k) = {datasample(le_arr,pixelSize)};
-        SampleCell(i,6,k) = {datasample(nir_arr,pixelSize)};
-    end
     
     for j = 1:6
            muArray(k,j) = mean(cell2mat(SampleCell(:,j,k)));
