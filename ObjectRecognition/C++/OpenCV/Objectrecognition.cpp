@@ -17,3 +17,11 @@
 using namespace cv;
 using namespace cv::ml;
 using namespace std;
+
+int SZ = 20;
+float affineFlags = WARP_INVERSE_MAP | INTER_LINEAR;
+int imgCount = 0;
+
+// files pathname
+string pathName;
+string labelpathName;
