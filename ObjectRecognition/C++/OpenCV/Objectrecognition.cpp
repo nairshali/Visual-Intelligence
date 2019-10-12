@@ -44,6 +44,11 @@ int main(int argc, char * argv[])
 	loadLabels(labelpathName, trainLabels);
 	//cout << "TrainSetLabels : " << endl;
 
-
+        // load test variables
+	labelpathName = "C:\\VI\\VI-2018-19-KinectPackage\\VI-2018-KinectPackage\\bksey\\Set2Labels.txt";
+	//labelpathName = "C:\\Users\\nirup\\Desktop\\Shalini Study Reading University\\VI\\Kinect\\Set2Labels.txt";
+	loadLabels(labelpathName, testLabels);
+	//cout << "TestSetLabels : " << endl;
+	
 	return 0;
 }
