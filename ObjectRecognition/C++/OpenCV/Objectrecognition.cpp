@@ -78,5 +78,13 @@ int main(int argc, char * argv[])
 	loadLabels(labelpathName, testLabels);
 	//cout << "TestSetLabels : " << endl;
 	
+	// Training Data Sets
+
+        // Build Training Data Set
+	pathName = "C:\\VI\\VI-2018-19-KinectPackage\\VI-2018-KinectPackage\\Set1\\Set1";
+	loadTrainLabel(pathName, trainLabels, trainCells, trainCellsLabels);
+	cout << "Training Data Build : " << endl;
+	outputFile << "Training Data Build : " << endl;
+	
 	return 0;
 }
