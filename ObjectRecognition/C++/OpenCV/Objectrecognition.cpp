@@ -26,6 +26,12 @@ int imgCount = 0;
 string pathName;
 string labelpathName;
 
+// load labels 
+void loadLabels(string &labelpathName, vector<string> &labels) {
+
+}
+
+
 // load image and build training Data/Labels sets
 void loadTrainLabel(string &pathName, vector<string> &labels, vector<Mat> &trainCells, vector<int> &trainCellsLabels) {
 	
