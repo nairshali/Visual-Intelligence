@@ -28,9 +28,28 @@ string labelpathName;
 
 // load labels 
 void loadLabels(string &labelpathName, vector<string> &labels) {
+int cnt = 0;
+	std::stringstream sstm;
+	string line = sstm.str();
+	
+	// read label file
+	ifstream myReadFile;
 
+	// open file
+	myReadFile.open(labelpathName);
+
+	// if file is open
+	if (myReadFile.is_open()) {
+		labels.push_back("Background");
+		//cout << "Labels : " << labels[cnt] << endl;
+		while (!myReadFile.eof()) {
+			getline(myReadFile, line);
+			labels.push_back(line);
+			cnt++;
+			//cout << "Labels : " << labels[cnt] << endl;
+		}
+	}
 }
-
 
 // load image and build training Data/Labels sets
 void loadTrainLabel(string &pathName, vector<string> &labels, vector<Mat> &trainCells, vector<int> &trainCellsLabels) {
