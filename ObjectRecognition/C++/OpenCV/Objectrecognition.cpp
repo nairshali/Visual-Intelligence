@@ -14,3 +14,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+using namespace cv;
+using namespace cv::ml;
+using namespace std;
