@@ -25,3 +25,25 @@ int imgCount = 0;
 // files pathname
 string pathName;
 string labelpathName;
+
+
+
+int main(int argc, char * argv[])
+{
+
+	// variable declaration of vector typ
+	vector<int> trainCellsLabels;
+	vector<int> testCellsLabels;
+
+	// outputfile
+	outputFile.open("C:\\VI\\VI-2018-19-KinectPackage\\VI-2018-KinectPackage\\ObjectDetectionOutput.txt", std::ios::out);
+
+	// load train variables
+	labelpathName = "C:\\VI\\VI-2018-19-KinectPackage\\VI-2018-KinectPackage\\bksey\\Set1Labels.txt";
+	//labelpathName = "C:\\Users\\nirup\\Desktop\\Shalini Study Reading University\\VI\\Kinect\\Set1Labels.txt";
+	loadLabels(labelpathName, trainLabels);
+	//cout << "TrainSetLabels : " << endl;
+
+
+	return 0;
+}
