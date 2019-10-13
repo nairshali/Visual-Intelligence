@@ -57,7 +57,10 @@ void loadTrainLabel(string &pathName, vector<string> &labels, vector<Mat> &train
 	Mat currentRGB;
 	Mat currentDepth;
 	Mat HSV; //matrix storage for HSV image
-	Mat threshold; //matrix storage for binary threshold image	
+	Mat threshold; //matrix storage for binary threshold image
+	
+	//x and y values for the location of the object
+	int x = 0, y = 0;
 }
 
 int main(int argc, char * argv[])
