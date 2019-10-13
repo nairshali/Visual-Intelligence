@@ -61,6 +61,27 @@ void loadTrainLabel(string &pathName, vector<string> &labels, vector<Mat> &train
 	
 	//x and y values for the location of the object
 	int x = 0, y = 0;
+	
+	// read training set
+	FreenectPlaybackWrapper wrap(pathName);
+
+	// Create the RGB, Depth, HSV, Threshold Windows
+	namedWindow("RGB", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
+	//namedWindow("Depth", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
+
+	// The key value represents a key pressed on the keyboard,
+	// where 27 is the ESCAPE key
+	char key = '0';
+	char file_name[100];
+	// The status represents the current status of the Playback
+	// wrapper. 
+	//
+	// A value of 0 represents that it has finished
+	// playback.
+	//
+	// The status can by bitwise AND to determine if the RGB or
+	// Depth image has been updated using the State enum.
+	uint8_t status = 255;
 }
 
 int main(int argc, char * argv[])
