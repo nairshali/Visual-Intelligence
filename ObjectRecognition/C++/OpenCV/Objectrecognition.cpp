@@ -103,6 +103,25 @@ void loadTrainLabel(string &pathName, vector<string> &labels, vector<Mat> &train
 			// Show the images in the windows
 			imshow("RGB", currentRGB);
 			//imshow("Depth", currentDepth);
+		
+		   	//ImgCount++;
+
+			// identify the image with atleast 25% object area based on pixel value change
+			int cnt = 0;
+			Scalar intensity;
+			for (int j = 0; j < currentDepth.rows; j++)
+			{
+				for (int i = 0; i < currentDepth.cols; i++)
+				{
+					intensity = currentDepth.at<uchar>(j, i);
+					if (intensity.val[0] != 95 && intensity.val[0] != 96 && intensity.val[0] != 97
+						&& intensity.val[0] != 98 && intensity.val[0] != 99 && intensity.val[0] != 255
+						)
+					{
+						cnt++;
+					}
+				}
+			}
 	}
 }
 
