@@ -53,7 +53,11 @@ int cnt = 0;
 
 // load image and build training Data/Labels sets
 void loadTrainLabel(string &pathName, vector<string> &labels, vector<Mat> &trainCells, vector<int> &trainCellsLabels) {
-	
+        // variable declaration
+	Mat currentRGB;
+	Mat currentDepth;
+	Mat HSV; //matrix storage for HSV image
+	Mat threshold; //matrix storage for binary threshold image	
 }
 
 int main(int argc, char * argv[])
