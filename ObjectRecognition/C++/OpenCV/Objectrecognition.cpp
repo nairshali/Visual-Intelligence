@@ -28,7 +28,7 @@ string labelpathName;
 
 // load labels 
 void loadLabels(string &labelpathName, vector<string> &labels) {
-int cnt = 0;
+	int cnt = 0;
 	std::stringstream sstm;
 	string line = sstm.str();
 	
@@ -82,6 +82,28 @@ void loadTrainLabel(string &pathName, vector<string> &labels, vector<Mat> &train
 	// The status can by bitwise AND to determine if the RGB or
 	// Depth image has been updated using the State enum.
 	uint8_t status = 255;
+	
+	while (key != 27 && status != 0)
+		{
+			// Loads in the next frame of Kinect data into the
+			// wrapper. Also pauses between the frames depending
+			// on the time between frames.
+			status = wrap.GetNextFrame();
+
+			// Determine if RGB is updated, and grabs the image
+			// if it has been updated
+			if (status & State::UPDATED_RGB)
+				currentRGB = wrap.RGB;
+
+			// Determine if Depth is updated, and grabs the image
+			// if it has been updated
+			if (status & State::UPDATED_DEPTH)
+				currentDepth = wrap.Depth;
+
+			// Show the images in the windows
+			imshow("RGB", currentRGB);
+			//imshow("Depth", currentDepth);
+	}
 }
 
 int main(int argc, char * argv[])
