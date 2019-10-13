@@ -122,6 +122,39 @@ void loadTrainLabel(string &pathName, vector<string> &labels, vector<Mat> &train
 					}
 				}
 			}
+		        
+		  	// detect as background
+			if (cnt == 0) {
+				//if (imgCount < 10) {
+					trainCellsLabels.push_back(0); // "Background"
+					//trainCells.push_back(grayscale);
+					trainCells.push_back(image);
+					trainDepthCells.push_back(currentDepth);
+				//}
+				printLabel = 1;
+				imgCount++;
+			}
+			else {
+				// atleast 25 percentage of object
+				if (cnt > 10000) {
+					if (printLabel == 1) {
+						readFrame++;
+						try {
+							cout << "labels : " << labels[readFrame] << endl;
+						}
+						catch (std::bad_alloc& excepObj)
+						{
+							std::cout << "bad_alloc Exception :: OUt Of Memory " << excepObj.what() << '\n';
+						}
+						printLabel = 0;
+					}
+					//cout << "trainCellsLabels : " << readFrame << endl;
+					trainCellsLabels.push_back(readFrame); // "Background"
+					//trainCells.push_back(grayscale);
+					trainCells.push_back(image);
+					trainDepthCells.push_back(currentDepth);
+				}
+			}
 	}
 }
 
