@@ -364,5 +364,14 @@ int main(int argc, char * argv[])
 	cout << "Train SVM : " << endl;
 	outputFile << "Train SVM : " << endl;
 	
+	// Test Data Sets
+
+    // Build Test Data Set
+	pathName = "C:\\VI\\VI-2018-19-KinectPackage\\VI-2018-KinectPackage\\Set2\\Set2";
+	loadTestLabel(pathName, testLabels, testCells, testCellsLabels, svm);
+
+	cout << "Test Data Build : " << endl;
+	outputFile << "Test Data Build : " << endl;
+	
 	return 0;
 }
