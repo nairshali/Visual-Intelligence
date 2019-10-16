@@ -72,6 +72,20 @@ void CreateTrainTestHOG(vector<vector<float> > &traintestHOG, vector<Mat> &train
 	}
 }
 
+	// Vector to Matrix
+	void ConvertVectortoMatrix(vector<vector<float> > &traintestHOG, Mat &traintestMat)
+	{
+		int descriptor_size = traintestHOG[0].size();
+		int traintestHOG_size = traintestHOG.size();
+		cout << "traintestHOG : " << traintestHOG_size << endl;
+		for (int i = 0; i < traintestHOG.size(); i++) {
+			for (int j = 0; j < descriptor_size; j++) {
+				traintestMat.at<float>(i, j) = traintestHOG[i][j];
+				//cout << "Image Count : " << traintestMat.at<float>(i, j) << endl;
+			}
+		}
+	}
+
 // load image and build training Data/Labels sets
 void loadTrainLabel(string &pathName, vector<string> &labels, vector<Mat> &trainCells, vector<int> &trainCellsLabels) {
         // variable declaration
