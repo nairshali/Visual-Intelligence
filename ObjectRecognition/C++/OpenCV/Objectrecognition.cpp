@@ -98,21 +98,23 @@ void getSVMParams(SVM *svm)
 	cout << "Gamma           : " << svm->getGamma() << endl;
 }
 
-	// SVM Train Model
-	void SVMtrain(Mat &trainMat, vector<int> &trainLabels, SVM *svm) {
-		//Ptr<SVM> svm = SVM::create();
-		//svm->setGamma(0.50625);
-		svm->setGamma(0.01);
-		svm->setC(10);
-		svm->setTermCriteria(TermCriteria(TermCriteria::MAX_ITER, 100, 1e-3));
-		//svm->setC(100);
-		svm->setKernel(SVM::LINEAR);
-		svm->setType(SVM::C_SVC);
-		getSVMParams(svm);
+// SVM Train Model
+void SVMtrain(Mat &trainMat, vector<int> &trainLabels, SVM *svm) {
+	//Ptr<SVM> svm = SVM::create();
+	//svm->setGamma(0.50625);
+	svm->setGamma(0.01);
+	svm->setC(10);
+	svm->setTermCriteria(TermCriteria(TermCriteria::MAX_ITER, 100, 1e-3));
+	//svm->setC(100);
+	svm->setKernel(SVM::LINEAR);
+	svm->setType(SVM::C_SVC);
+	getSVMParams(svm);
+	Ptr<TrainData> td = TrainData::create(trainMat, ROW_SAMPLE, trainLabels);
+	svm->train(td);
 
-		Ptr<TrainData> td = TrainData::create(trainMat, ROW_SAMPLE, trainLabels);
-		svm->train(td);
-	}
+	//svm->trainAuto(td);
+	svm->save("C:\\Users\\nirup\\Desktop\\Shalini Study Reading University\\VI\\Kinect\\objectrecognition.yml");
+}
 
 // load image and build training Data/Labels sets
 void loadTrainLabel(string &pathName, vector<string> &labels, vector<Mat> &trainCells, vector<int> &trainCellsLabels) {
@@ -270,6 +272,12 @@ int main(int argc, char * argv[])
 	ConvertVectortoMatrix(trainHOG, trainMat);
 	cout << "ConvertTrainVectortoMatrix : " << endl;
 	outputFile << "ConvertTrainVectortoMatrix : " << endl;
+	
+	// Train SVM
+	Ptr<SVM> svm = SVM::create();
+	SVMtrain(trainMat, trainCellsLabels, svm);
+	cout << "Train SVM : " << endl;
+	outputFile << "Train SVM : " << endl;
 	
 	return 0;
 }
