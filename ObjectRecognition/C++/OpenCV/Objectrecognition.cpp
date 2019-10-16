@@ -188,5 +188,12 @@ int main(int argc, char * argv[])
 	cout << "Training Data Build : " << endl;
 	outputFile << "Training Data Build : " << endl;
 	
+	// Train hog
+	vector<vector<float> > trainHOG;
+	vector<vector<float> > testHOG;
+	CreateTrainTestHOG(trainHOG, trainCells, trainDepthCells);
+	cout << "CreateTrainHOG : " << endl;
+	outputFile << "CreateTrainHOG : " << endl;
+	
 	return 0;
 }
