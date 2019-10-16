@@ -98,6 +98,22 @@ void getSVMParams(SVM *svm)
 	cout << "Gamma           : " << svm->getGamma() << endl;
 }
 
+	// SVM Train Model
+	void SVMtrain(Mat &trainMat, vector<int> &trainLabels, SVM *svm) {
+		//Ptr<SVM> svm = SVM::create();
+		//svm->setGamma(0.50625);
+		svm->setGamma(0.01);
+		svm->setC(10);
+		svm->setTermCriteria(TermCriteria(TermCriteria::MAX_ITER, 100, 1e-3));
+		//svm->setC(100);
+		svm->setKernel(SVM::LINEAR);
+		svm->setType(SVM::C_SVC);
+		getSVMParams(svm);
+
+		Ptr<TrainData> td = TrainData::create(trainMat, ROW_SAMPLE, trainLabels);
+		svm->train(td);
+	}
+
 // load image and build training Data/Labels sets
 void loadTrainLabel(string &pathName, vector<string> &labels, vector<Mat> &trainCells, vector<int> &trainCellsLabels) {
         // variable declaration
@@ -242,7 +258,7 @@ int main(int argc, char * argv[])
 	cout << "CreateTrainHOG : " << endl;
 	outputFile << "CreateTrainHOG : " << endl;
 	
-		// Descriptor Size
+	// Descriptor Size
 	int descriptor_size = trainHOG[0].size();
 	cout << "Descriptor Size : " << descriptor_size << endl;
 	outputFile << "Descriptor Size : " << descriptor_size << endl;
