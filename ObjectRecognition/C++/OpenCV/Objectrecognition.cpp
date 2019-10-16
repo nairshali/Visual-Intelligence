@@ -216,5 +216,13 @@ int main(int argc, char * argv[])
 	cout << "CreateTrainHOG : " << endl;
 	outputFile << "CreateTrainHOG : " << endl;
 	
+		// Descriptor Size
+	int descriptor_size = trainHOG[0].size();
+	cout << "Descriptor Size : " << descriptor_size << endl;
+	outputFile << "Descriptor Size : " << descriptor_size << endl;
+
+	// Training Matrix
+	Mat trainMat(trainHOG.size(), descriptor_size, CV_32FC1);
+	
 	return 0;
 }
