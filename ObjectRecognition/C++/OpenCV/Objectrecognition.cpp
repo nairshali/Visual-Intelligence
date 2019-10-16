@@ -86,6 +86,18 @@ void ConvertVectortoMatrix(vector<vector<float> > &traintestHOG, Mat &traintestM
 	}
 }
 
+// Set SVM parameters
+void getSVMParams(SVM *svm)
+{
+	cout << "Kernel type     : " << svm->getKernelType() << endl;
+	cout << "Type            : " << svm->getType() << endl;
+	//cout << "TermCriteria    : " << svm->getTermCriteria() << endl;
+	cout << "C               : " << svm->getC() << endl;
+	cout << "Degree          : " << svm->getDegree() << endl;
+	cout << "Nu              : " << svm->getNu() << endl;
+	cout << "Gamma           : " << svm->getGamma() << endl;
+}
+
 // load image and build training Data/Labels sets
 void loadTrainLabel(string &pathName, vector<string> &labels, vector<Mat> &trainCells, vector<int> &trainCellsLabels) {
         // variable declaration
