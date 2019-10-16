@@ -51,6 +51,27 @@ void loadLabels(string &labelpathName, vector<string> &labels) {
 	}
 }
 
+//HOGDescriptor hog(Size(640, 480), Size(16, 16), Size(8, 8), Size(8, 8), 9);
+HOGDescriptor hog;
+
+// Feacture Extractor
+void CreateTrainTestHOG(vector<vector<float> > &traintestHOG, vector<Mat> &traintestCells, vector<Mat> &traintestDepthCells) {
+
+	for (int y = 0; y < traintestCells.size(); y++) {
+		vector<float> descriptors;
+		vector<float> depthDescriptors;
+		try {
+			hog.compute(traintestCells[y], descriptors, Size(64, 128), Size(16, 16));
+		}
+		catch (std::bad_alloc& excepObj)
+		{
+			std::cout << "bad_alloc Exception :: Out Of Memory " << excepObj.what() << '\n';
+		}
+		//descriptors.insert(descriptors.end(), depthDescriptors.begin(), depthDescriptors.end());
+		traintestHOG.push_back(descriptors);
+	}
+}
+
 // load image and build training Data/Labels sets
 void loadTrainLabel(string &pathName, vector<string> &labels, vector<Mat> &trainCells, vector<int> &trainCellsLabels) {
         // variable declaration
