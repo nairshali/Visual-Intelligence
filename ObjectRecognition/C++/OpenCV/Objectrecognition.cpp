@@ -223,6 +223,91 @@ void loadTrainLabel(string &pathName, vector<string> &labels, vector<Mat> &train
 	}
 }
 
+// load image and build test data/labels sets
+	void loadTestLabel(string &pathName, vector<string> &labels, vector<Mat> &testCells, vector<int> &testCellsLabels, SVM *svm)
+	{
+		// variable declaration
+		Mat currentRGB;
+		Mat currentDepth;
+		Mat HSV; //matrix storage for HSV image
+		Mat threshold; //matrix storage for binary threshold image
+		int readFrame = 0;
+		int printLabel = 0;
+		int ImgCount = 0;
+		int label = 0;
+
+		//x and y values for the location of the object
+		int x = 0, y = 0;
+
+		//create slider bars for HSV filtering
+		//createTrackbars();
+
+		// read training set
+		FreenectPlaybackWrapper wrap(pathName);
+
+		// Create the RGB, Depth, HSV, Threshold Windows
+		namedWindow("RGB", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
+		//namedWindow("Depth", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
+
+		// The key value represents a key pressed on the keyboard,
+		// where 27 is the ESCAPE key
+		char key = '0';
+
+		char file_name[100];
+		// The status represents the current status of the Playback
+		// wrapper. 
+		//
+		// A value of 0 represents that it has finished
+		// playback.
+		//
+		// The status can by bitwise AND to determine if the RGB or
+		// Depth image has been updated using the State enum.
+		uint8_t status = 255;
+
+		while (key != 27 && status != 0)
+		{
+			// Loads in the next frame of Kinect data into the
+			// wrapper. Also pauses between the frames depending
+			// on the time between frames.
+			status = wrap.GetNextFrame();
+
+			// Determine if RGB is updated, and grabs the image
+			// if it has been updated
+			if (status & State::UPDATED_RGB)
+				currentRGB = wrap.RGB;
+
+			// Determine if Depth is updated, and grabs the image
+			// if it has been updated
+			if (status & State::UPDATED_DEPTH)
+				currentDepth = wrap.Depth;
+
+			// Show the images in the windows
+			//imshow("RGB", currentRGB);
+			//imshow("Depth", currentDepth);
+
+			int cnt = 0;
+			Scalar intensity;
+			for (int j = 0; j < currentDepth.rows; j++)
+			{
+				for (int i = 0; i < currentDepth.cols; i++)
+				{
+					intensity = currentDepth.at<uchar>(j, i);
+					//cout << "intensity1 : " << intensity.val[0] << endl;
+					if (intensity.val[0] != 95 && intensity.val[0] != 96 && intensity.val[0] != 97
+						&& intensity.val[0] != 98 && intensity.val[0] != 99 && intensity.val[0] != 255
+						)
+					{
+						cnt++;
+						//cout << "intensity : " << intensity.val[0] << endl;
+					}
+				}
+			}
+
+			// Check for keyboard input
+			key = cv::waitKey(10);
+		}
+	}
+
 int main(int argc, char * argv[])
 {
 
