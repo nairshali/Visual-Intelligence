@@ -175,6 +175,24 @@ void SVMtrain(Mat &trainMat, vector<int> &trainLabels, SVM *svm) {
 	svm->save("C:\\Users\\nirup\\Desktop\\Shalini Study Reading University\\VI\\Kinect\\objectrecognition.yml");
 }
 
+// SVM Evaluation
+	void SVMevaluate(Mat &testResponse, float &count, float &accuracy, vector<int> &testLabels) {
+		string response;
+		int read = 1;
+
+		for (int i = 0; i < testResponse.rows; i++)
+		{
+			//cout << testResponse.at<float>(i, 0) << " = " << testLabels[i] << endl;
+			outputFile << testResponse.at<float>(i, 0) << " = " << testLabels[i] << endl;
+
+			if (testResponse.at<float>(i, 0) == testLabels[i]) {
+				count = count + 1;
+
+			}
+		}
+		accuracy = (count / testResponse.rows) * 100;
+	}
+
 // load image and build training Data/Labels sets
 void loadTrainLabel(string &pathName, vector<string> &labels, vector<Mat> &trainCells, vector<int> &trainCellsLabels) {
         // variable declaration
