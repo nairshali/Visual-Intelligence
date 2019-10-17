@@ -38,6 +38,53 @@ bool evaluate = false; // evaluation
 string pathName;
 string labelpathName;
 
+// labels convertion
+void switchLabel(string &line, int &labels) {
+	
+	if (line.compare("Baby") == 0) {
+		labels = 1;
+	}
+	else if (line.compare("Dog") == 0) {
+		labels = 2;
+	}
+	else if (line.compare("Dinosaur") == 0) {
+		labels = 3;
+	}
+	else if (line.compare("Coffee Tin") == 0) {
+		labels = 4;
+	}
+	else if (line.compare("Mug") == 0) {
+		labels = 5;
+	}
+	else if (line.compare("Car") == 0) {
+		labels = 6;
+	}
+	else if (line.compare("Camera") == 0) {
+		labels = 7;
+	}
+	else if (line.compare("Keyboard") == 0) {
+		labels = 8;
+	}
+	else if (line.compare("Koala") == 0) {
+		labels = 9;
+	}
+	else if (line.compare("Blackberry") == 0) {
+		labels = 10;
+	}
+	else if (line.compare("Diet Coke Bottle") == 0) {
+		labels = 11;
+	}
+	else if (line.compare("Duck") == 0) {
+		labels = 12;
+	}
+	else if (line.compare("Dragon") == 0) {
+		labels = 13;
+	}
+	else if (line.compare("Android") == 0) {
+		labels = 14;
+	}
+}
+
 // load labels 
 void loadLabels(string &labelpathName, vector<string> &labels) {
 	int cnt = 0;
