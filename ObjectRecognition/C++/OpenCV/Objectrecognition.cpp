@@ -22,6 +22,16 @@ int SZ = 20;
 float affineFlags = WARP_INVERSE_MAP | INTER_LINEAR;
 int imgCount = 0;
 
+// Training/Test Cells
+vector<Mat> trainCells;
+vector<Mat> testCells;
+vector<Mat> trainDepthCells;
+vector<Mat> testDepthCells;
+vector<string> trainLabels;
+vector<string> testLabels;
+Mat image;
+
+
 // files pathname
 string pathName;
 string labelpathName;
@@ -303,8 +313,80 @@ void loadTrainLabel(string &pathName, vector<string> &labels, vector<Mat> &train
 				}
 			}
 
+			if (cnt == 0) {
+
+				// Test Build set for each complete object
+				if (evaluate) {
+					
+					// train hog
+					std::vector<std::vector<float> > testHOG;
+					CreateTrainTestHOG(testHOG, testCells, testDepthCells);
+					cout << "CreateTestHOG : " << endl;
+
+					int descriptor_size = testHOG[0].size();
+					cout << "Descriptor Size : " << descriptor_size << endl;
+
+					Mat testMat(testHOG.size(), descriptor_size, CV_32FC1);
+
+					ConvertVectortoMatrix(testHOG, testMat);
+					cout << "ConvertVectortoMatrix : " << endl;
+
+					// Prediction
+					Mat testResponse;
+					svm->predict(testMat, testResponse);
+					cout << "Prediction : " << endl;
+					cout << " test response" << testResponse.size() << endl;
+
+					// Evaluate Accuracy
+					float count = 0;
+					float accuracy = 0;
+					SVMevaluate(testResponse, count, accuracy, testCellsLabels);
+					cout << "Accuracy        : " << accuracy << "%" << endl;
+					outputFile << "Accuracy        : " << accuracy << "%" << endl;
+
+					// clear data sets
+					testCells.clear();
+					testDepthCells.clear();
+					testCellsLabels.clear();
+					testResponse.release();
+
+					// Stop evaluation
+					evaluate = false;
+				}
+
+				// Build Test Data Sets
+				testCellsLabels.push_back(0); // "Background"
+				//testCells.push_back(grayscale);
+				testCells.push_back(image);				
+				testDepthCells.push_back(currentDepth);
+				printLabel = 1;
+
+			}
+			else {
+				// atleast 25 percentage of object
+				if (cnt > 10000) {
+					if (printLabel == 1) {
+						readFrame++;
+						// read correct label No based on train label
+						string line = labels[readFrame];
+						switchLabel(line, label);
+						cout << "labels : " << line << endl;
+						cout << "Actual label : " << label << endl;
+						printLabel = 0;
+						evaluate = true;
+					}
+					//cout << "testCellsLabels : " << readFrame << endl;
+					testCellsLabels.push_back(label); // "Background"
+					//testCells.push_back(grayscale);
+					testCells.push_back(image);
+					testDepthCells.push_back(currentDepth);
+				}
+			}
+
 			// Check for keyboard input
 			key = cv::waitKey(10);
+		}
+	}
 		}
 	}
 
