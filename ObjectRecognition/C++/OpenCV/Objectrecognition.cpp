@@ -31,6 +31,8 @@ vector<string> trainLabels;
 vector<string> testLabels;
 Mat image;
 
+//some boolean variables for different functionality within this program
+bool evaluate = false; // evaluation
 
 // files pathname
 string pathName;
