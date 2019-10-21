@@ -34,6 +34,13 @@ Mat image;
 //some boolean variables for different functionality within this program
 bool evaluate = false; // evaluation
 
+bool useCountour = true; // countour
+bool edgeDetection = false;// edge detection
+
+bool useThreshold = false;// thresholds
+bool trackObjects = false; // track Objects
+bool useMorphOps = false; // Erode and Dialtes
+
 // files pathname
 string pathName;
 string labelpathName;
