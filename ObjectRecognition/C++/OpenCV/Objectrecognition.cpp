@@ -196,6 +196,24 @@ void drawObject(int x, int y, Mat &frame) {
 
 }
 
+// Morphology
+void morphOps(Mat &thresh) {
+	//create structuring element that will be used to "dilate" and "erode" image.
+	//the element chosen here is a 3px by 3px rectangle
+
+	Mat erodeElement = getStructuringElement(MORPH_RECT, Size(3, 3));
+	//dilate with larger element so make sure object is nicely visible
+	Mat dilateElement = getStructuringElement(MORPH_RECT, Size(8, 8));
+
+	erode(thresh, thresh, erodeElement);
+	erode(thresh, thresh, erodeElement);
+
+	dilate(thresh, thresh, dilateElement);
+	dilate(thresh, thresh, dilateElement);
+
+	//imshow("Dilated Image", thresh);
+}
+
 //HOGDescriptor hog(Size(640, 480), Size(16, 16), Size(8, 8), Size(8, 8), 9);
 HOGDescriptor hog;
 
