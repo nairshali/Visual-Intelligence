@@ -45,6 +45,9 @@ bool useMorphOps = false; // Erode and Dialtes
 string pathName;
 string labelpathName;
 
+// open file
+std::fstream outputFile;
+
 // labels convertion
 void switchLabel(string &line, int &labels) {
 	
@@ -116,6 +119,48 @@ void loadLabels(string &labelpathName, vector<string> &labels) {
 		}
 	}
 }
+
+// Function header for threshold
+	void thresh_callback(int, void*);
+
+	void on_trackbar(int, void*)
+	{//This function gets called whenever a
+		// trackbar position is changed
+	}
+
+	// Integer to String
+	string intToString(int number) {
+		std::stringstream ss;
+		ss << number;
+		return ss.str();
+	}
+
+	// Trackbars
+	void createTrackbars() {
+
+		//create window for trackbars
+		namedWindow(trackbarWindowName, 0);
+
+		//create memory to store trackbar name on window
+		char TrackbarName[50];
+		sprintf(TrackbarName, "H_MIN", H_MIN);
+		sprintf(TrackbarName, "H_MAX", H_MAX);
+		sprintf(TrackbarName, "S_MIN", S_MIN);
+		sprintf(TrackbarName, "S_MAX", S_MAX);
+		sprintf(TrackbarName, "V_MIN", V_MIN);
+		sprintf(TrackbarName, "V_MAX", V_MAX);
+		//create trackbars and insert them into window
+		//3 parameters are: the address of the variable that is changing when the trackbar is moved(eg.H_LOW),
+		//the max value the trackbar can move (eg. H_HIGH), 
+		//and the function that is called whenever the trackbar is moved(eg. on_trackbar)
+		//                                  ---->    ---->     ---->      
+		createTrackbar("H_MIN", trackbarWindowName, &H_MIN, H_MAX, on_trackbar);
+		createTrackbar("H_MAX", trackbarWindowName, &H_MAX, H_MAX, on_trackbar);
+		createTrackbar("S_MIN", trackbarWindowName, &S_MIN, S_MAX, on_trackbar);
+		createTrackbar("S_MAX", trackbarWindowName, &S_MAX, S_MAX, on_trackbar);
+		createTrackbar("V_MIN", trackbarWindowName, &V_MIN, V_MAX, on_trackbar);
+		createTrackbar("V_MAX", trackbarWindowName, &V_MAX, V_MAX, on_trackbar);
+	}
 
 //HOGDescriptor hog(Size(640, 480), Size(16, 16), Size(8, 8), Size(8, 8), 9);
 HOGDescriptor hog;
