@@ -7,14 +7,14 @@ Keywords: Object detection, Kinect, OpenCV, Histogram of Oriented Gradients (HOG
 
 # PROPOSED SYSTEM
 This study uses edge detection and Histogram of Oriented Gradients combined with the support vector machines SVM classifier for object detection along with contour and edge detection algorithm. The OpenCV C++ framework is used to design the object detection tool. 
-A.  Edge detection
+## A.  Edge detection
 Canny edge detection is a technique to extract useful structural information from different vision objects and dramatically reduce the amount of data to be processed. It has been widely applied in various computer vision systems. Canny has found that the requirements for the application of edge detection on diverse vision systems are relatively similar. Thus, an edge detection solution to address these requirements can be implemented in a wide range of situations. The general criteria for edge detection include: 
 1.	Detection of edge with low error rate, which means that the detection should accurately catch as many edges shown in the image as possible
 2.	The edge point detected from the operator should accurately localize on the center of the edge.
 3.	A given edge in the image should only be marked once, and where possible, image noise should not create false edges.
 To satisfy these requirements Canny used the calculus of variations – a technique which finds the function which optimizes a given functional. The optimal function in Canny's detector is described by the sum of four exponential terms, but it can be approximated by the first derivative of a Gaussian. Among the edge detection methods developed so far, Canny edge detection algorithm is one of the most strictly defined methods that provides good and reliable detection. Owing to its optimality to meet with the three criteria for edge detection and the simplicity of process for implementation, it became one of the most popular algorithms for edge detection [2]. 
 
-B.  HOG and SVM 
+## B.  HOG and SVM 
 Histogram of Oriented Gradients have been introduced by Dalal and Triggs in [3]. It is based on the principle that the local appearance and shape of the object can be described by the intensity distribution of the gradients or the direction of the contours. The gradient of an image ∇I(x, y) is a vector quantity that indicates how the intensity of the pixel varie-s in space. The gradient is computed by convolution of the image with a first derivative mask. The simplest masks, such as the one-point centered derivative 1-D masks, seem to give the best performance and are therefore generally used to calculate Histogram of Oriented Gradients. The horizontal and vertical gradients can then be calculated as follows:
  
 The amplitude G and the direction Θ of the gradient are then obtained from Gx and Gy according to the following:
@@ -26,12 +26,14 @@ In order to avoid disparities due to variations in illumination, the descriptors
 were v represents the non-normalized vector containing all the histograms of a single block, ∥v∥k its k-norm for k = 1, 2 and E is a small constant.In their experiments, Dalal and Triggs found the L2-hys, L2-norm, and L1-sqrt schemes provide similar performance, while the L1-norm provides slightly less reliable performance; however, all four methods showed very significant improvement over the non-normalized data. The OpenCV library uses the L2-hys normalization for the HOG implementation.
 
 Now focus on the second part of the detection system using HOG and SVM: (Support Vector Machine). The function of the classifier is to give a decision about the candidate's belonging to the class sought. Learning is done from a database of positive examples (class containing the characteristics of the examples of Objects) and negative examples (class containing the characteristics of examples of no Objects). By taking the characteristics of the candidate image as input, the classifier must determine the class closest to the candidate image. In most cases, this step is the last step of the process since once recognized by the classifier, it is enough to display the windows of detection.Support Vector Machine (SVM) is a method developed by Vapnik [14] to determine a separating hyperplane between the spaces of the two classes to be separated. The idea is to maximize the margin, that is, the distance between the separation boundary and the nearest samples. To do this, the algorithm transforms the representation space of the input data into a space of greater dimension, in which it is probable that there exists a linear separator. Due to its very high efficiency, this method is very commonly used in the field of Object detection [15].
-SVM Parameter:
-Kernel: Functions which takes low dimensional input space and transform it to a higher dimensional space i.e. it converts not separable problem to separable problem, these functions are called kernels. The kernel parameter can be tuned to take “Linear”,”Poly”,”rbf” etc. Linear kernel perform better if you have large number of features (>1000) because it is more likely that the data is linearly separable in high dimensional space.
-Gamma: Higher the value of gamma, will try to exact fit the as per training data set i.e. generalization error and cause over-fitting problem. 
-
-## C: Penalty parameter C of the error term. It also controls the trade off between smooth decision boundary and classifying the training points correctly. We should always look at the cross validation score to have effective combination of these parameters and avoid over-fitting.
-C. Open CV
+### SVM Parameter:
+#### Kernel: 
+Functions which takes low dimensional input space and transform it to a higher dimensional space i.e. it converts not separable problem to separable problem, these functions are called kernels. The kernel parameter can be tuned to take “Linear”,”Poly”,”rbf” etc. Linear kernel perform better if you have large number of features (>1000) because it is more likely that the data is linearly separable in high dimensional space.
+#### Gamma: 
+Higher the value of gamma, will try to exact fit the as per training data set i.e. generalization error and cause over-fitting problem. 
+#### C: 
+Penalty parameter C of the error term. It also controls the trade off between smooth decision boundary and classifying the training points correctly. We should always look at the cross validation score to have effective combination of these parameters and avoid over-fitting.
+## C. Open CV
 OpenCV (Open source computer vision) is a library of programming functions mainly aimed at real-time vision. Originally developed by Intel, it was later supported by Willow Garage then Itseez (which was later acquired by Intel). The library is cross-platform and free for use under the open-source BSD license.[2]
 ## D. Microsoft Speech API 
 The Speech Application Programming Interface or SAPI is an API developed by Microsoft to allow the use of speech recognition and speech synthesis within Windows applications. The Speech API can be viewed as an interface or piece of middleware which sits between applications and speech engines (recognition and synthesis). 
