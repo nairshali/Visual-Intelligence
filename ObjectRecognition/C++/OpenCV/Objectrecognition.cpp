@@ -12,7 +12,8 @@
 #include <fstream> // text file reading
 #include <sstream>
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> 
+#include <sapi.h>
 
 using namespace cv;
 using namespace cv::ml;
