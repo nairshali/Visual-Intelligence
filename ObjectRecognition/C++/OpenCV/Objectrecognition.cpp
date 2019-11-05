@@ -23,6 +23,29 @@ int SZ = 20;
 float affineFlags = WARP_INVERSE_MAP | INTER_LINEAR;
 int imgCount = 0;
 
+//initial min and max HSV filter values.
+//these will be changed using trackbars
+int H_MIN = 0;
+int H_MAX = 255;
+int S_MIN = 0;
+int S_MAX = 255;
+int V_MIN = 0;
+int V_MAX = 255;
+const string trackbarWindowName = "Trackbars";
+//default capture width and height
+const int FRAME_WIDTH = 640;
+const int FRAME_HEIGHT = 480;
+//max number of objects to be detected in frame
+const int MAX_NUM_OBJECTS = 50;
+//minimum and maximum object area
+const int MIN_OBJECT_AREA = 20 * 20;
+const int MAX_OBJECT_AREA = FRAME_HEIGHT * FRAME_WIDTH / 1.5;
+// Thresholds
+Mat gray;
+int thresh = 100;
+int max_thresh = 255;
+RNG rng(12345);
+
 // Training/Test Cells
 vector<Mat> trainCells;
 vector<Mat> testCells;
