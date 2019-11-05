@@ -40,6 +40,7 @@ const int MAX_NUM_OBJECTS = 50;
 //minimum and maximum object area
 const int MIN_OBJECT_AREA = 20 * 20;
 const int MAX_OBJECT_AREA = FRAME_HEIGHT * FRAME_WIDTH / 1.5;
+
 // Thresholds
 Mat gray;
 int thresh = 100;
@@ -361,6 +362,62 @@ void SVMtrain(Mat &trainMat, vector<int> &trainLabels, SVM *svm) {
 
 			if (testResponse.at<float>(i, 0) == testLabels[i]) {
 				count = count + 1;
+				
+				// Speech 
+				if (testResponse.at<float>(i, 0) != 0 ) {
+					if (read == 1) { 
+						ISpVoice * pVoice = NULL;
+						if (FAILED(::CoInitialize(NULL))) 
+							printf("Error to intiliaze COM\n");
+						HRESULT hr = CoCreateInstance(CLSID_SpVoice, NULL, CLSCTX_ALL, IID_ISpVoice, (void **)&pVoice); 
+						if (SUCCEEDED(hr)) { 
+							if (testResponse.at<float>(i, 0) == 1) { 
+								hr = pVoice->Speak(L"I See Baby", 0, NULL); 
+								//Speak(L"Hello World", 0, NULL); 
+							} 
+							else if (testResponse.at<float>(i, 0) == 2) { 
+								hr = pVoice->Speak(L"I See Dog", 0, NULL); 
+								//Speak 
+							} else if (testResponse.at<float>(i, 0) == 3) { 
+								hr = pVoice->Speak(L"I See a Dinosaur", 0, NULL); 
+								//Speak 
+							} else if (testResponse.at<float>(i, 0) == 4) {
+								hr = pVoice->Speak(L"I See a Coffee Tin", 0, NULL); 
+								//Speak 
+							} else if (testResponse.at<float>(i, 0) == 5) {
+								hr = pVoice->Speak(L"I See a Mug", 0, NULL); 
+								//Speak 
+							} else if (testResponse.at<float>(i, 0) == 6) { 
+								hr = pVoice->Speak(L"I See a Car", 0, NULL); 
+								//Speak 
+							} else if (testResponse.at<float>(i, 0) == 7) { 
+								hr = pVoice->Speak(L"I See a Camera", 0, NULL); 
+								//Speak 
+							} else if (testResponse.at<float>(i, 0) == 8) { 
+								hr = pVoice->Speak(L"I See a Keyboard", 0, NULL); 
+								//Speak 
+							} else if (testResponse.at<float>(i, 0) == 9) { 
+								hr = pVoice->Speak(L"I See a Koala", 0, NULL); 
+								//Speak 
+							} else if (testResponse.at<float>(i, 0) == 10) { 
+								hr = pVoice->Speak(L"I See a Blackberry", 0, NULL); 
+								//Speak 
+							} else if (testResponse.at<float>(i, 0) == 11) { 
+								hr = pVoice->Speak(L"I See a Diet Coke Bottle", 0, NULL); 
+								//Speak 
+							} else if (testResponse.at<float>(i, 0) == 12) {
+								hr = pVoice->Speak(L"I See a Duck", 0, NULL); 
+								//Speak 
+							} else if (testResponse.at<float>(i, 0) == 13) {
+								hr = pVoice->Speak(L"I See a Dragon", 0, NULL); 
+								//Speak 
+							} else if (testResponse.at<float>(i, 0) == 14) { 
+								hr = pVoice->Speak(L"I See a Android", 0, NULL); 
+								//Speak 
+							}
+							pVoice->Release(); pVoice = NULL;
+							read = 0; 
+							outputFile << "labels : " << trainLabels[testLabels[i]] << endl; }
 
 			}
 		}
